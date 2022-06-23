@@ -1,6 +1,7 @@
 <script>
   import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
+  import Newie from './lib/Newie.svelte'
 
   let you = "YOU";
   let age = 12
@@ -11,6 +12,7 @@
   <h1>Hello {you.toLowerCase() + age}</h1>
 
   <Counter />
+  <Newie />
 
 <!--   <p>
     Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte

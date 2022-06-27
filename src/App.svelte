@@ -6,6 +6,7 @@
   import InfoProp from './lib/infoProp.svelte';
   import Logiko from './lib/logic.svelte';
   import Keyed from './lib/keyedBlock.svelte';
+  import Events from './lib/events.svelte';
   import App from './App.svelte';
 import Logic from './lib/logic.svelte';
 
@@ -49,6 +50,8 @@ const pkg = {
 {#each things as thing (thing.id)}
 <Keyed names={thing.names}/>
 {/each}
+
+<Events/>
 
 
 <!--   <p>

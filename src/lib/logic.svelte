@@ -17,6 +17,24 @@
 	]; 
 	//
 
+
+	//Await Promise Blocks
+async function getRandom (){
+	const res = await fetch(``);
+		const text = await res.text();
+
+		if (res.ok) {
+			return text;
+		} else {
+			throw new Error(text);
+		}
+}
+
+	let promise = getRandom();
+	function handleClick() {
+		promise = getRandom();
+	} //
+
 </script>
 
 
@@ -51,10 +69,20 @@
 
 </ul>
 
-<!--Keyed each block-->
-<p>
-	<span>The emoji for { names } is { emoji }</span>
-</p>
+<!--Await promise BlockS-->
+<button on:click= {handleClick}>Give me a random &#128043	
+</button>
+
+{#await promise}
+	<p>...waiting</p>
+{:then number}
+	<p>The number is {number}</p>
+{:catch error}
+	<p style="color: red">{error.message}</p>
+{/await}
+
+
+
 
 
 

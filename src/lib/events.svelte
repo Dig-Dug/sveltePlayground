@@ -1,4 +1,5 @@
 <script>
+import { createEventDispatcher } from 'svelte';    
 	let m = { x: 0, y: 0 };
 
 	function handleMousemove(event) {
@@ -9,6 +10,15 @@
      let handleClick =() =>{
 		alert('no more alerts')
 	}
+    //Component Events
+    const dispatch = createEventDispatcher();
+	function sayHello() {
+		dispatch('message', {
+			text: 'Hello!'
+		});
+	}
+    //Event forwarding https://svelte.dev/tutorial/event-forwarding
+    //Event forwarding https://svelte.dev/tutorial/dom-event-forwarding
 </script>
 
 <div on:mousemove={handleMousemove}>
@@ -18,6 +28,8 @@
 
 <!-- //Event Modifier only once-->
 <button on:click|once = {handleClick}>Click it</button>
+<!--Component Events-->
+<button on:click = {sayHello}>sayHello</button>
 
 
 

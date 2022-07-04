@@ -1,33 +1,42 @@
 <script>
 
-import Events from './lib/events.svelte';
+/* import Events from './lib/events.svelte';
 import Binding from './lib/binding.svelte';
-import Keypad from './lib//Keypad.svelte';
+import Keypad from './lib//Keypad.svelte'; */
+import Lifecycle from './lib/lifecycle.svelte';
 
 //Component Events
-function handleMsg(event) {
+/* function handleMsg(event) {
 		alert(event.detail.text);
-	}
+	} */
 //ComponentBindings
-let pin;
+/* let pin;
 	$: view = pin ? pin.replace(/\d(?!$)/g, '•') : 'enter your pin';
 
 	function handleSubmit() {
 		alert(`submitted ${pin}`);
-	}
+	} */
 
 </script>
 
 <!-- Component Events -->
 <div class="thre">
-<div><Events on:message={handleMsg}/></div>	
+    <!-- <div><Events on:message={handleMsg}/></div>	
 	<div><Binding/></div>
-	
 	<div><h1 style="color: {pin ? '#333' : '#ccc'}">{view}</h1>
-	
-		<Keypad bind:value={pin} on:submit={handleSubmit}/></div>
-	
-</div>
+    <Keypad bind:value={pin} on:submit={handleSubmit}/>
+    </div>-->
+</div> 
+<Lifecycle/>
+
+
+
+
+
+
+
+
+
 
 <style>
 	.thre {  display: grid;

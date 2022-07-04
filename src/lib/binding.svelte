@@ -122,7 +122,7 @@ let size = 42, text ="editMoi";
   grid-template-rows: 1fr 1fr 1fr; 
   gap: 0px 0px; 
     }
-.in{
+/* .in{
     position: relative;
     top: 27px;
     right: 131px;
@@ -130,7 +130,7 @@ let size = 42, text ="editMoi";
 }
 label { display: flex }
 input, p { margin: 6px; margin-bottom: 0px,}
-.done {opacity: 0.4;}
+.done {opacity: 0.4;} */
 
 input {
 		display: block;

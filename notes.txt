@@ -2,3 +2,17 @@ npm init vite my-app -- --template svelte
 cd my-app
 npm install
 npm run dev
+
+
+
+
+First, you'll need to integrate Svelte with a build tool. 
+We recommend using Vite with vite-plugin-svelte...
+
+npm init vite my-app -- --template svelte
+
+update the DOM when your component's state changes
+reactive declarations: 
+
+                let count = 0;
+                $: doubled = count * 2;

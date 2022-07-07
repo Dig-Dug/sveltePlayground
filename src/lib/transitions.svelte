@@ -1,5 +1,6 @@
 <script>
 import {fade} from 'svelte/transition';
+import { fly } from 'svelte/transition';
 //alternative to "fade"import {fly} from 'svelte/transition';
 //or -> import { fade, fly } from 'svelte/transition';
 
@@ -32,6 +33,11 @@ import {fade} from 'svelte/transition';
             };
         }
 //
+
+//Transition Events
+    let viisible = true;
+    let status = 'waiting...';
+//
 </script>
 
 <!--transitionOptions-->
@@ -48,16 +54,35 @@ import {fade} from 'svelte/transition';
 
 
 
+<!-- Custom Js transition -->
+    <label>
+        <input type="checkbox" bind:checked={visiblee}>
+        visible
+    </label>
 
-<label>
-	<input type="checkbox" bind:checked={visiblee}>
-	visible
-</label>
+    {#if visiblee}
+        <p transition:typewriter>
+            The quick brown fox jumps over the lazy dog
+        </p>
+    {/if}
+<!-- Custom Js transition -->
 
-{#if visiblee}
-	<p transition:typewriter>
-		The quick brown fox jumps over the lazy dog
-	</p>
-{/if}
+<!-- Transition Events -->
+    <label>
+        <input type="checkbox" bind:checked={viisible}>
+        visible
+    </label>
 
+    {#if viisible}
+        <p
+            transition:fly="{{ y: 200, duration: 2000 }}"
+            on:introstart="{() => status = 'intro started'}"
+            on:outrostart="{() => status = 'outro started'}"
+            on:introend="{() => status = 'intro ended'}"
+            on:outroend="{() => status = 'outro ended'}"
+        >
+            Flies in and out
+        </p>
+    {/if}
+<!-- Transition Events -->
 

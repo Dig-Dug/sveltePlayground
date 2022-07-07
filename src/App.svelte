@@ -1,148 +1,53 @@
 <script>
-import {count} from './lib/Stores/stores.js';
-import {countOther,name,greeting} from './lib/Stores/stores.js';
+import  {clickOutside}  from "./lib/Stores/clickOutside.js";
+import  {longpress}  from "./lib/Stores/longpress.js";
 
-import {time, elapsed} from './lib/Stores/stores.js';
-import Incrementer from './lib/Stores/Incrementer.svelte';
-import Decrementer from './lib/Stores/Decrementer.svelte';
-import Resetter from './lib/Stores/Resetter.svelte';
-
-import { tweened } from 'svelte/motion';
-import { cubicOut } from 'svelte/easing';
-import {spring} from 'svelte/motion';
-import AppFirst from './AppFirst.svelte';
-
-import Transitions from './lib/transitions.svelte';
-import TransitionToDo from  './lib/transitionToDo.svelte';
-//import {onDestroy} from 'svelte';
-let countValue; //not used
-  count.subscribe( value => {
-  countValue = value;
-  }
-)
-//auto-subscriptions//when component instantiated and destroyed
- //many times would result in memory leak, call it in onDestroy hook
- /* const unsubscribe = count.subscribe(
-    value => {countValue = value;}
- );
-onDestroy(unsubscribe);  <--replace it with store value reference($count) */
-
-const formatter = new Intl.DateTimeFormat('en',{
-    hour12: true,
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit'
-});
+/**actions the use directive*/
+    let showModal = true;
+//
 
 
-//Motion Tweened
- const progress = tweened(0, {
-		duration: 400,
-		easing: cubicOut
-	});
-//Motion Tweened    
-//Motion Spring
- let coords = spring({ x: 25, y: 50 }, {
-		stiffness: 0.1,
-		damping: 0.25
-	});
- let size = spring(10);
-//Motion Spring
-
-
+//Adding parameters
+	let duration = 2000;
+	let pressed = false;
+//Adding parameters
 </script>
-<div class="container">
-<div>
-    <h1 class="try">the count is {$count}</h1>  <!--$count --> 
-    <Incrementer/>
-    <Decrementer/>
-    <Resetter/>
 
-    <!-- Custom Stores -->
-        <h1 class="to">the count is {$countOther}</h1>
-        <button on:click = {countOther.increment}>+</button>
-        <button on:click = {countOther.decrement}>-</button>
-        <button on:click = {countOther.reset}>=</button>
-    <!-- Custom Stores -->
 
-    <!-- Store Bindings -->
-        <h1>{$greeting}</h1>
-        <input bind:value={$name}>
-        <button on:click="{() => $name += '!'}">Click and add !!!</button>
-    <!-- Store Bindings -->
+<div class="cont">
 
-    <!--Motion tweened  https://svelte.dev/tutorial/tweened-->
-        <progress value={$progress}></progress>
+	<!-- actions the use directive -->
+		<div>
+		<button on:click={() => (showModal = true)}>Show Modal</button>
+		{#if showModal}
+		<div class="box" use:clickOutside on:outclick={() => (showModal = false)}>
+		Click outside me!
+		</div>
+		{/if}
+		</div>
+	<!-- actions the use directive -->
 
-        <button on:click="{() => progress.set(0)}">
-            0%
-        </button>
 
-        <button on:click="{() => progress.set(0.25)}">
-            25%
-        </button>
 
-        <button on:click="{() => progress.set(0.5)}">
-            50%
-        </button>
+	<div>
+<!-- Adding parameters -->
+	<label>
+	<input type=range bind:value={duration} max={2000} step={100}>
+	{duration}ms
+	</label>
 
-        <button on:click="{() => progress.set(0.75)}">
-            75%
-        </button>
+	<button use:longpress={duration}
+	on:longpress="{() => pressed = true}"
+	on:mouseenter="{() => pressed = false}"
+	>press and hold</button>
 
-        <button on:click="{() => progress.set(1)}">
-            100%
-        </button>
-    <!--Motion tweened -->
-    <h1>Transitions</h1>
-    <Transitions/>
+	{#if pressed}
+	<p>congratulations, you pressed and held for {duration}ms</p>
+	{/if}
+<!-- Adding parameters -->
 
+	</div>
 </div>
-<div>
-        <!-- Readable Stores -->
-        <h1>The time is {formatter.format($time)}</h1>
-        <!-- Derived Stores -->
-        <p>
-            This page has been open for
-            {$elapsed} {$elapsed === 1 ? 'second' : 'seconds'}
-        </p>
-
-<!--Motion spring https://svelte.dev/tutorial/spring-->
-    <div style="position: absolute; right: 1em;">
-        <label>
-            <h3>stiffness ({coords.stiffness})</h3>
-            <input bind:value={coords.stiffness} type="range" min="0" max="1" step="0.01">
-        </label>
-
-        <label>
-            <h3>damping ({coords.damping})</h3>
-            <input bind:value={coords.damping} type="range" min="0" max="1" step="0.01">
-        </label>
-    </div>
-
-    <svg
-        on:mousemove="{e => coords.set({ x: e.clientX, y: e.clientY })}"
-        on:mousedown="{() => size.set(30)}"
-        on:mouseup="{() => size.set(10)}"
-    >
-        <circle cx={$coords.x} cy={$coords.y} r={$size}/>
-    </svg>
-<!--Motion spring-->
-
-
-</div> 
-<div>
-    <TransitionToDo/>
-</div>
-<div>
-   
-</div>
-</div>
-
-
-
-
-
 
 
 
@@ -152,33 +57,32 @@ const formatter = new Intl.DateTimeFormat('en',{
 
 
 <style>
-    .try{
-        font-family: 'Oswald', sans-serif;
-        color: blueviolet;
-    }
-    .to{
-        color: burlywood;
-    }
-    progress {
-        margin-top: 12px;
-		display: block;
-		width: 38%;
-	}
-    svg {
-        background-color: rgba(0, 255, 255, 0.137);
-		width: 100%;
-		height: 100%;
-	}
-	circle {
-		fill: #ff3e00;
-	}
-    .container {
+	.cont{
   display: grid; 
   grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1fr 1fr; 
   gap: 0px 0px; 
-  grid-template-areas: 
-    ". ."
-    ". ."; 
 }
+	.box {
+		--width: 100px;
+		--height: 100px;
+		position: absolute;
+		width: var(--width);
+		height: var(--height);
+		left: calc(50% - var(--width) / 2);
+		top: calc(50% - var(--height) / 2);
+		display: flex;
+		align-items: center;
+		padding: 8px;
+		border-radius: 4px;
+		background-color: #ff3e00;
+		color: #fff;
+		text-align: center;
+		font-weight: bold;
+
+
+		
+    left: 49px;
+   
+    top: 85px;
+	}
 </style>

@@ -104,15 +104,17 @@ let number = 0;
 				{number}
 			</span>
 		{/key}
-	</div>
-	<br />
-	<button
+
+		<button
 		on:click={() => {
 			number += 1;
 		}}>
 		Increment
 	</button>
 
+	</div>
+	<br />
+	
 <!-- Key Blocks -->
 
 
@@ -142,7 +144,7 @@ let number = 0;
 
 	label {
 		position: relative;
-		line-height: 1.2;
+		line-height: 3.2;
 		padding: 0.5em 2.5em 0.5em 2em;
 		margin: 0 0 0.5em 0;
 		border-radius: 2px;

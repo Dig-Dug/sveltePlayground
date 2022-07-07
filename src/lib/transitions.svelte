@@ -1,6 +1,9 @@
 <script>
 import {fade} from 'svelte/transition';
 import { fly } from 'svelte/transition';
+import { slide } from 'svelte/transition';
+
+
 //alternative to "fade"import {fly} from 'svelte/transition';
 //or -> import { fade, fly } from 'svelte/transition';
 
@@ -38,6 +41,15 @@ import { fly } from 'svelte/transition';
     let viisible = true;
     let status = 'waiting...';
 //
+
+//Local transitions   **transitions to play only when individual items are added and removed
+ let showItems = true;
+ let i = 5;
+ let items = ['one', 'two', 'three', 'four', 
+ 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+//
+
+
 </script>
 
 <!--transitionOptions-->
@@ -52,8 +64,8 @@ import { fly } from 'svelte/transition';
         {/if}
 <!---->
 
-
-
+<div class="container">
+<div>
 <!-- Custom Js transition -->
     <label>
         <input type="checkbox" bind:checked={visiblee}>
@@ -68,6 +80,7 @@ import { fly } from 'svelte/transition';
 <!-- Custom Js transition -->
 
 <!-- Transition Events -->
+ <p>status {status}</p>
     <label>
         <input type="checkbox" bind:checked={viisible}>
         visible
@@ -75,7 +88,7 @@ import { fly } from 'svelte/transition';
 
     {#if viisible}
         <p
-            transition:fly="{{ y: 200, duration: 2000 }}"
+            transition:fly="{{ x:10,y: 20, duration: 2000 }}"
             on:introstart="{() => status = 'intro started'}"
             on:outrostart="{() => status = 'outro started'}"
             on:introend="{() => status = 'intro ended'}"
@@ -85,4 +98,48 @@ import { fly } from 'svelte/transition';
         </p>
     {/if}
 <!-- Transition Events -->
+</div>
+<div>
+<!-- local transitions -->
+    <label>
+        <input type="checkbox" bind:checked={showItems}>
+        show list
+    </label>
 
+    <label>
+        <input type="range" bind:value={i} max=10>
+
+    </label>
+    {#if showItems}
+	{#each items.slice(0, i) as item}
+		<div transition:slide|local>
+			{item}
+		</div>
+	{/each}
+ {/if}
+ 
+<!-- local transitions -->
+</div>
+</div>
+
+
+<style>
+	div {
+		padding: 0.5em 0;
+		border-top: 1px solid #eee;
+	}
+
+.container {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". ."
+    ". ."; 
+}
+
+
+
+
+</style>

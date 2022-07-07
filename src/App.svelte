@@ -13,6 +13,7 @@ import {spring} from 'svelte/motion';
 import AppFirst from './AppFirst.svelte';
 
 import Transitions from './lib/transitions.svelte';
+import TransitionToDo from  './lib/transitionToDo.svelte';
 //import {onDestroy} from 'svelte';
 let countValue; //not used
   count.subscribe( value => {
@@ -50,54 +51,61 @@ const formatter = new Intl.DateTimeFormat('en',{
 
 
 </script>
-<h1 class="try">the count is {$count}</h1>  <!--$count --> 
-<Incrementer/>
-<Decrementer/>
-<Resetter/>
+<div class="container">
+<div>
+    <h1 class="try">the count is {$count}</h1>  <!--$count --> 
+    <Incrementer/>
+    <Decrementer/>
+    <Resetter/>
 
-<!-- Readable Stores -->
-<h1>The time is {formatter.format($time)}</h1>
-<!-- Derived Stores -->
-<p>
-	This page has been open for
-	{$elapsed} {$elapsed === 1 ? 'second' : 'seconds'}
-</p>
-<!-- Custom Stores -->
- <h1 class="to">the count is {$countOther}</h1>
- <button on:click = {countOther.increment}>+</button>
- <button on:click = {countOther.decrement}>-</button>
- <button on:click = {countOther.reset}>=</button>
-<!-- Custom Stores -->
+    <!-- Custom Stores -->
+        <h1 class="to">the count is {$countOther}</h1>
+        <button on:click = {countOther.increment}>+</button>
+        <button on:click = {countOther.decrement}>-</button>
+        <button on:click = {countOther.reset}>=</button>
+    <!-- Custom Stores -->
 
-<!-- Store Bindings -->
- <h1>{$greeting}</h1>
- <input bind:value={$name}>
- <button on:click="{() => $name += '!'}">Click and add !!!</button>
-<!-- Store Bindings -->
+    <!-- Store Bindings -->
+        <h1>{$greeting}</h1>
+        <input bind:value={$name}>
+        <button on:click="{() => $name += '!'}">Click and add !!!</button>
+    <!-- Store Bindings -->
 
-<!--Motion tweened  https://svelte.dev/tutorial/tweened-->
- <progress value={$progress}></progress>
+    <!--Motion tweened  https://svelte.dev/tutorial/tweened-->
+        <progress value={$progress}></progress>
 
- <button on:click="{() => progress.set(0)}">
-	0%
- </button>
+        <button on:click="{() => progress.set(0)}">
+            0%
+        </button>
 
- <button on:click="{() => progress.set(0.25)}">
-	25%
- </button>
+        <button on:click="{() => progress.set(0.25)}">
+            25%
+        </button>
 
- <button on:click="{() => progress.set(0.5)}">
-	50%
- </button>
+        <button on:click="{() => progress.set(0.5)}">
+            50%
+        </button>
 
- <button on:click="{() => progress.set(0.75)}">
-	75%
- </button>
+        <button on:click="{() => progress.set(0.75)}">
+            75%
+        </button>
 
- <button on:click="{() => progress.set(1)}">
-	100%
- </button>
-<!--Motion tweened -->
+        <button on:click="{() => progress.set(1)}">
+            100%
+        </button>
+    <!--Motion tweened -->
+    <h1>Transitions</h1>
+    <Transitions/>
+
+</div>
+<div>
+        <!-- Readable Stores -->
+        <h1>The time is {formatter.format($time)}</h1>
+        <!-- Derived Stores -->
+        <p>
+            This page has been open for
+            {$elapsed} {$elapsed === 1 ? 'second' : 'seconds'}
+        </p>
 
 <!--Motion spring https://svelte.dev/tutorial/spring-->
     <div style="position: absolute; right: 1em;">
@@ -120,7 +128,28 @@ const formatter = new Intl.DateTimeFormat('en',{
         <circle cx={$coords.x} cy={$coords.y} r={$size}/>
     </svg>
 <!--Motion spring-->
-<Transitions/>
+
+
+</div> 
+<div>
+    <TransitionToDo/>
+</div>
+<div>
+   
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
     .try{
@@ -136,11 +165,20 @@ const formatter = new Intl.DateTimeFormat('en',{
 		width: 38%;
 	}
     svg {
-        background-color: aqua;
+        background-color: rgba(0, 255, 255, 0.137);
 		width: 100%;
 		height: 100%;
 	}
 	circle {
 		fill: #ff3e00;
 	}
+    .container {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". ."
+    ". ."; 
+}
 </style>

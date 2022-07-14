@@ -1,7 +1,9 @@
 <script>
 import  {clickOutside}  from "./lib/Stores/clickOutside.js";
 import  {longpress}  from "./lib/Stores/longpress.js";
+import AdvancedStyling from "./lib/advancedStyling.svelte";
 
+import Box from "./lib/Stores/Box.svelte";
 /**actions the use directive*/
     let showModal = true;
 //
@@ -24,12 +26,18 @@ import  {longpress}  from "./lib/Stores/longpress.js";
 		Click outside me!
 		</div>
 		{/if}
+
+		
 		</div>
+		<Box>
+			<h2>Hello!</h2>
+			<p>This is a box. It can contain anything.</p>
+		</Box>
 	<!-- actions the use directive -->
 
+	
+<div>
 
-
-	<div>
 <!-- Adding parameters -->
 	<label>
 	<input type=range bind:value={duration} max={2000} step={100}>
@@ -46,6 +54,8 @@ import  {longpress}  from "./lib/Stores/longpress.js";
 	{/if}
 <!-- Adding parameters -->
 
+
+<AdvancedStyling/>
 	</div>
 </div>
 

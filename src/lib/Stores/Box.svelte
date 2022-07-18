@@ -2,6 +2,7 @@
 where to put them. We do this with the <slot> element. -->
 
 	<div class="box">
+	 
 		<slot>
 			<em>no content was provided</em>
 		</slot>

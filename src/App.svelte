@@ -6,6 +6,9 @@ import AdvancedStyling from "./lib/advancedStyling.svelte";
 import Box from "./lib/Stores/Box.svelte";
 import ContactCard from './lib/Stores/ContactCard.svelte';
 import Hoverable from './lib/Stores/Hoverable.svelte';
+
+
+
 /**actions the use directive*/
     let showModal = true;
 //
@@ -71,7 +74,10 @@ import Hoverable from './lib/Stores/Hoverable.svelte';
 						{/if}
 					</div>
 				</Hoverable>
-		     <!-- slot props -->
+		    <!-- slot props -->
+
+			<!-- https://svelte.dev/tutorial/context-api -->
+			
 		<!-- component composition -->
 	<!-- actions the use directive -->
 

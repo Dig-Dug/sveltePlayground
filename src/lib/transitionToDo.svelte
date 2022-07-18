@@ -58,7 +58,8 @@ import { fly } from 'svelte/transition';
 let number = 0;
 </script>
 
-<!-- Deferred Transitions -->
+<!-- Deferred Transitions  example with animations
+    https://svelte.dev/tutorial/animate -->
 	<div class='board'>
 		<input
 			placeholder="what needs to be done?"

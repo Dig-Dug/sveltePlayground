@@ -4,6 +4,8 @@ import  {longpress}  from "./lib/Stores/longpress.js";
 import AdvancedStyling from "./lib/advancedStyling.svelte";
 
 import Box from "./lib/Stores/Box.svelte";
+import ContactCard from './lib/Stores/ContactCard.svelte';
+import Hoverable from './lib/Stores/Hoverable.svelte';
 /**actions the use directive*/
     let showModal = true;
 //
@@ -29,10 +31,48 @@ import Box from "./lib/Stores/Box.svelte";
 
 		
 		</div>
-		<Box>
-			<h2>Hello!</h2>
-			<p>This is a box. It can contain anything.</p>
-		</Box>
+		<!-- component composition -->
+			<Box> 
+				<h2>Hello!</h2>
+				<p>Component Composition.</p>
+			</Box>
+
+			<!-- direct component children rendering-->
+			  <Box/>
+			<!-- direct component children rendering-->
+
+			<!-- Named slots -->
+				<ContactCard>
+					 <!-- add elements attributes in component -->
+					<span slot="name">
+						P. Sherman
+					</span>
+				
+					<span slot="address">
+						42 Wallaby Way<br>
+						Sydney
+					</span>
+				</ContactCard>
+			<!-- Named slots -->
+
+			<!-- checking for slot content -->
+			    <!-- TOO BIG
+				https://svelte.dev/tutorial/optional-slots
+			     -->
+            <!-- checking for slot content -->
+
+			<!-- slot props -->
+				<Hoverable let:hovering={active}>
+					<div class:active>
+						{#if active}
+							<p>I am being hovered upon.</p>
+						{:else}
+							<p>Hover over me!</p>
+						{/if}
+					</div>
+				</Hoverable>
+		     <!-- slot props -->
+		<!-- component composition -->
 	<!-- actions the use directive -->
 
 	
@@ -94,5 +134,15 @@ import Box from "./lib/Stores/Box.svelte";
     left: 49px;
    
     top: 85px;
+	}
+div {
+		padding: 1em;
+		margin: 0 0 1em 0;
+		background-color: #eee;
+	}
+
+.active {
+		background-color: #ff3e00;
+		color: white;
 	}
 </style>

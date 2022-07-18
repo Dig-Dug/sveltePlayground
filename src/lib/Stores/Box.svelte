@@ -1,12 +1,14 @@
 <!-- Before a component can accept children, though, it needs to know 
 where to put them. We do this with the <slot> element. -->
 
-<div class="box">
-	<slot></slot>
-</div>
+	<div class="box">
+		<slot>
+			<em>no content was provided</em>
+		</slot>
+	</div>
 
 <style>
-	.box {
+.box {
 		width: 300px;
 		border: 1px solid #aaa;
 		border-radius: 2px;

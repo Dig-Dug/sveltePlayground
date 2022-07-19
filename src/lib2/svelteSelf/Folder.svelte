@@ -1,5 +1,5 @@
 <script>
-import File from "./sveltSelf/File.svelte";
+import File from "./File.svelte";
 //<svelte:self> 
     export let expanded = false;
 	export let name;

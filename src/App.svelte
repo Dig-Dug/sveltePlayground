@@ -53,10 +53,14 @@
 	let sellected = optionss[0];
 /* svelte:element */
 </script>
-<!-- svelteSelf -->
- <Folder name="Home" files={root} expanded/>
-<!-- svelteSelf -->
 
+<div class="container">
+<div>
+<!-- svelteSelf -->
+  <Folder name="Home" files={root} expanded/>
+<!-- svelteSelf -->
+</div>
+    <div>
 <!-- <svelte:component> The this value can be any component constructor, or a falsy value -->
     <select bind:value={selected}>
         {#each options as option}
@@ -65,7 +69,8 @@
     </select>
     <svelte:component this={selected.component}/>
 <!-- <svelte:component>-->
-
+    </div>
+    <div>
 <!-- svelte:element -->
     <select bind:value={sellected}>
         {#each optionss as option}
@@ -74,3 +79,26 @@
     </select>
     <svelte:element this={sellected}>I'm a {sellected} tag</svelte:element>
 <!-- svelte:element -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<style>
+    .container {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". . ."
+    ". . ."
+    ". . ."; 
+}
+</style>

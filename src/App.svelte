@@ -7,6 +7,7 @@
 
     import Todo from './lib2/Todo.svelte';
     import Box from './Box.svelte';
+    import AudioPlayer, { stopAll }  from './lib2/AudioPlayer.svelte';
 //<svelte:self>
     let root = [
             {
@@ -99,6 +100,13 @@
 		});
 	}
 /**svelte:options*/
+
+/* the debug tag */
+     let user = {
+        firstname : 'Yesid',
+        lastname : 'García'
+     };
+/* the debug tag */
 </script>
 
 <svelte:window on:keydown={handleKeydown} bind:scrollY={y}/>
@@ -109,13 +117,17 @@ on:mouseleave={handleMouseleave}
 
 <svelte:head>  <!-- FIX IT -->
 	<link rel="stylesheet" href="./dark-theme.css">
-</svelte:head> <h1>Hello world!</h1>
+</svelte:head> <h1>Hello woioiorld!</h1>
 
 <div class="container">
 <div>
+
+
 <!-- svelteSelf -->
   <Folder name="Home" files={root} expanded/>
 <!-- svelteSelf -->
+
+
 
 <!-- svelteWindow -->
 
@@ -128,6 +140,8 @@ on:mouseleave={handleMouseleave}
         {/if}
     </div>
 <!-- svelteWindow -->
+
+
 
 
 </div>
@@ -158,13 +172,23 @@ on:mouseleave={handleMouseleave}
 <!-- svelte:options -->
 
 <!-- svelte:fragment -->
-<Box>
-    <svelte:fragment slot="footer">
-        <p>All rights reserved.</p>
-		<p>Copyright (c) 2019 Svelte Industries</p>
-    </svelte:fragment>
-</Box>
+    <Box>
+        <svelte:fragment slot="footer">
+            <p>All rights reserved.</p>
+            <p>Copyright (c) 2019 Svelte Industries</p>
+        </svelte:fragment>
+    </Box>
 <!-- svelte:fragment -->
+
+<!-- debugging the @debug tag --> 
+        <!--  If you now open your devtools and start interacting
+        with the <input> elements, you'll trigger the debugger 
+        as the value of user changes. -->
+    <input bind:value={user.firstname}>
+    <input bind:value={user.lastname}>
+    {@debug user}
+    <h1>Hello {user.firstname}!</h1>
+<!-- debugging the @debug tag -->
     </div>
     <div>
 <!-- svelte:element -->
@@ -176,7 +200,53 @@ on:mouseleave={handleMouseleave}
     <svelte:element this={sellected}>I'm a {sellected} tag</svelte:element>
 <!-- svelte:element -->
 
-
+<!-- Module context sharing code -->
+        <!-- https://musopen.org/music/9862-the-blue-danube-op-314/ -->
+        
+        <button on:click={stopAll}>
+            stop all audio
+        </button>
+        
+        <!-- https://musopen.org/music/9862-the-blue-danube-op-314/ -->
+        <AudioPlayer
+            src="https://sveltejs.github.io/assets/music/strauss.mp3"
+            title="The Blue Danube Waltz"
+            composer="Johann Strauss"
+            performer="European Archive"
+        />
+        
+        <!-- https://musopen.org/music/43775-the-planets-op-32/ -->
+        <AudioPlayer
+            src="https://sveltejs.github.io/assets/music/holst.mp3"
+            title="Mars, the Bringer of War"
+            composer="Gustav Holst"
+            performer="USAF Heritage of America Band"
+        />
+        
+        <!-- https://musopen.org/music/8010-3-gymnopedies/ -->
+        <AudioPlayer
+            src="https://sveltejs.github.io/assets/music/satie.mp3"
+            title="Gymnopédie no. 1"
+            composer="Erik Satie"
+            performer="Prodigal Procrastinator"
+        />
+        
+        <!-- https://musopen.org/music/2567-symphony-no-5-in-c-minor-op-67/ -->
+        <AudioPlayer
+            src="https://sveltejs.github.io/assets/music/beethoven.mp3"
+            title="Symphony no. 5 in Cm, Op. 67 - I. Allegro con brio"
+            composer="Ludwig van Beethoven"
+            performer="European Archive"
+        />
+        
+        <!-- https://musopen.org/music/43683-requiem-in-d-minor-k-626/ -->
+        <AudioPlayer
+            src="https://sveltejs.github.io/assets/music/mozart.mp3"
+            title="Requiem in D minor, K. 626 - III. Sequence - Lacrymosa"
+            composer="Wolfgang Amadeus Mozart"
+            performer="Markus Staab"
+        />
+<!-- Module context sharing code -->
     </div>
 </div>
 
@@ -201,7 +271,6 @@ on:mouseleave={handleMouseleave}
         </div>
     </div>
 <!-- svelteWindowBingings -->
-
 
 
 
